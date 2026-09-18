@@ -1,0 +1,1351 @@
+/* =========================================================
+   살핌 정보 / 뉴스 페이지 전용 CSS
+   =========================================================
+
+   중요:
+   - style.css는 수정하지 않는다.
+   - news.html의 .news-page를 최상위 기준으로 사용한다.
+   - 메인 페이지의 .app / .main / .cards 등에 영향을 주지 않는다.
+========================================================= */
+
+
+/* =========================================================
+   1. 기본
+========================================================= */
+
+.news-page {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: stretch;
+
+    background: #F7F4EE;
+    color: #2D312D;
+
+    font-family:
+        Pretendard,
+        "Apple SD Gothic Neo",
+        "Noto Sans KR",
+        "Malgun Gothic",
+        sans-serif;
+
+    font-size: 15px;
+    line-height: 1.6;
+
+    box-sizing: border-box;
+}
+
+
+.news-page *,
+.news-page *::before,
+.news-page *::after {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   2. Sidebar
+========================================================= */
+
+/*
+   style.css의 sidebar 스타일을 그대로 활용하되
+   뉴스 페이지에서 필요한 부분만 보정한다.
+*/
+
+.news-page .news-sidebar {
+    position: relative !important;
+
+    width: 280px !important;
+    min-width: 280px !important;
+    max-width: 280px !important;
+
+    min-height: 100vh !important;
+    height: auto !important;
+
+    flex: 0 0 280px !important;
+    flex-shrink: 0 !important;
+
+    align-self: stretch !important;
+
+    overflow: visible !important;
+
+    z-index: 100;
+}
+
+
+.news-page .news-sidebar .sidebar-inner {
+    position: sticky !important;
+
+    top: 0;
+
+    width: 100%;
+    min-height: 100vh;
+
+    overflow: visible !important;
+}
+
+
+/* 사이드바 메뉴 */
+
+.news-page .news-sidebar .menu button {
+    width: 100%;
+
+    cursor: pointer;
+}
+
+
+.news-page .news-sidebar .menu button.active {
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   3. 뉴스 본문 전체
+========================================================= */
+
+.news-main {
+    flex: 1;
+
+    min-width: 0;
+
+    width: auto;
+
+    overflow: visible;
+
+    background: #F7F4EE;
+}
+
+
+.news-container {
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+
+    padding:
+        42px 42px 80px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   4. 페이지 헤더
+========================================================= */
+
+.news-container .page-header {
+    margin: 0 0 30px;
+}
+
+
+.news-container .page-title {
+    margin: 0;
+
+    font-size: 42px;
+    line-height: 1.2;
+
+    font-weight: 800;
+
+    letter-spacing: -1.2px;
+
+    color: #355A43;
+}
+
+
+.news-container .page-description {
+    margin:
+        12px 0 0;
+
+    font-size: 18px;
+
+    font-weight: 500;
+
+    color: #6E6A61;
+}
+
+
+.news-container .page-period {
+    margin:
+        8px 0 0;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    color: #948F85;
+}
+
+
+.news-container .total-count {
+    display: inline-block;
+
+    margin:
+        13px 0 0;
+
+    padding:
+        6px 11px;
+
+    background: #E8EFE8;
+
+    color: #4C7358;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   5. 검색 영역
+========================================================= */
+
+.news-container .search-area {
+    width: 100%;
+
+    margin:
+        0 0 20px;
+}
+
+
+.news-container .search-box {
+    display: flex;
+
+    width: 100%;
+
+    gap: 8px;
+
+    padding: 8px;
+
+    background: #FFFFFF;
+
+    border:
+        1px solid #DEDAD1;
+
+    border-radius: 14px;
+}
+
+
+.news-container .search-input {
+    flex: 1;
+
+    min-width: 0;
+
+    padding:
+        11px 14px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #44443F;
+
+    font-family: inherit;
+
+    font-size: 14px;
+}
+
+
+.news-container .search-input::placeholder {
+    color: #B0ACA4;
+}
+
+
+.news-container .search-button {
+    flex-shrink: 0;
+
+    padding:
+        10px 22px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #4F8A64;
+
+    color: #FFFFFF;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+.news-container .search-button:hover {
+    background: #417752;
+
+    transform: translateY(-1px);
+}
+
+
+.news-container .search-button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   6. 필터
+========================================================= */
+
+.news-container .filter-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 10px;
+}
+
+
+.news-container .filter-select {
+    min-width: 120px;
+
+    padding:
+        9px 34px 9px 12px;
+
+    background: #FFFDF9;
+
+    color: #65645F;
+
+    border:
+        1px solid #DEDAD1;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    outline: none;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.18s ease,
+        background 0.18s ease;
+}
+
+
+.news-container .filter-select:hover {
+    border-color: #C9C5BC;
+}
+
+
+.news-container .filter-select:focus {
+    border-color: #88A994;
+
+    background: #FFFFFF;
+}
+
+
+.news-container .reset-button {
+    margin-left: auto;
+
+    color: #8A857D;
+
+    font-size: 12px;
+
+    text-decoration: none;
+
+    transition:
+        color 0.18s ease;
+}
+
+
+.news-container .reset-button:hover {
+    color: #4F8A64;
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   7. 연도 필터
+========================================================= */
+
+.news-container .year-filter {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin:
+        26px 0 20px;
+}
+
+
+.news-container .year-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 62px;
+
+    padding:
+        9px 18px;
+
+    background: #FFFFFF;
+
+    color: #6F706B;
+
+    border:
+        1px solid #DDD9D0;
+
+    border-radius: 22px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    transition:
+        all 0.2s ease;
+}
+
+
+.news-container .year-button:hover {
+    color: #4F7F5E;
+
+    border-color: #8EB49A;
+
+    background: #F7FBF8;
+
+    transform: translateY(-1px);
+}
+
+
+.news-container .year-button.active {
+    background: #4F8A64;
+
+    color: #FFFFFF;
+
+    border-color: #4F8A64;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 4px 10px rgba(79, 138, 100, 0.16);
+}
+
+
+/* =========================================================
+   8. 검색 결과 정보
+========================================================= */
+
+.news-container .result-info {
+    margin:
+        0 0 24px;
+
+    color: #858077;
+
+    font-size: 13px;
+}
+
+
+.news-container .result-info strong {
+    margin-left: 4px;
+
+    color: #355A43;
+
+    font-size: 15px;
+}
+
+
+.news-container .result-keyword {
+    color: #4F8A64;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   9. 메인 뉴스 레이아웃
+========================================================= */
+
+.news-container .main-layout {
+    display: flex;
+
+    width: 100%;
+
+    align-items: flex-start;
+
+    gap: 36px;
+
+    overflow: visible;
+}
+
+
+/* =========================================================
+   10. 뉴스 목록 영역
+========================================================= */
+
+.news-container .news-section {
+    flex: 1;
+
+    min-width: 0;
+
+    width: auto;
+
+    overflow: visible;
+}
+
+
+.news-container .news-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   11. 뉴스 카드
+========================================================= */
+
+.news-container .news-card {
+    display: flex;
+
+    width: 100%;
+
+    min-width: 0;
+
+    min-height: 170px;
+
+    gap: 20px;
+
+    padding: 20px;
+
+    background: #FFFFFF;
+
+    border:
+        1px solid #E3DED4;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+}
+
+
+.news-container .news-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #C8D8CC;
+
+    box-shadow:
+        0 6px 18px rgba(63, 85, 67, 0.08);
+}
+
+
+/* =========================================================
+   12. 뉴스 이미지
+========================================================= */
+
+.news-container .news-image-box {
+    width: 180px;
+
+    min-width: 180px;
+
+    height: 125px;
+
+    overflow: hidden;
+
+    border-radius: 11px;
+
+    background: #EFECE6;
+}
+
+
+.news-container .news-image {
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+.news-container .news-card:hover .news-image {
+    transform: scale(1.03);
+}
+
+
+.news-container .no-image {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #9F9A90;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   13. 기사 내용
+========================================================= */
+
+.news-container .news-content {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.news-container .news-meta {
+    margin:
+        0 0 8px;
+
+    color: #98938A;
+
+    font-size: 13px;
+
+    font-weight: 500;
+}
+
+
+.news-container .news-title {
+    margin:
+        0 0 10px;
+
+    color: #272A27;
+
+    font-size: 20px;
+
+    line-height: 1.45;
+
+    font-weight: 700;
+
+    letter-spacing: -0.4px;
+
+    word-break: keep-all;
+}
+
+
+.news-container .news-summary {
+    margin:
+        0 0 13px;
+
+    color: #66645E;
+
+    font-size: 14px;
+
+    line-height: 1.75;
+
+    word-break: keep-all;
+}
+
+
+.news-container .news-link {
+    display: inline-block;
+
+    color: #4F8A64;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        color 0.18s ease;
+}
+
+
+.news-container .news-link:hover {
+    color: #3F704F;
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   14. 오른쪽 키워드 영역
+========================================================= */
+
+.news-container .analysis-section {
+    position: sticky;
+
+    top: 30px;
+
+    width: 310px;
+
+    min-width: 310px;
+
+    max-width: 310px;
+
+    flex: 0 0 310px;
+
+    align-self: flex-start;
+
+    height: auto;
+
+    overflow: visible;
+
+    padding: 0;
+}
+
+
+/* =========================================================
+   15. 키워드 패널
+========================================================= */
+
+.news-container .keyword-panel {
+    width: 100%;
+
+    padding:
+        24px 20px;
+
+    background: #FFFDF9;
+
+    border:
+        1px solid #E2DDD3;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 4px 14px rgba(64, 70, 63, 0.035);
+}
+
+
+.news-container .keyword-title {
+    margin:
+        0 0 28px;
+
+    text-align: center;
+
+    color: #355A43;
+
+    font-size: 19px;
+
+    font-weight: 800;
+}
+
+
+.news-container .keyword-cloud {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+}
+
+
+.news-container .keyword-item {
+    min-height: 44px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 4px 0;
+}
+
+
+.news-container .keyword-word {
+    color: #4F8A64;
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    letter-spacing: -0.5px;
+
+    white-space: nowrap;
+
+    text-align: center;
+}
+
+
+.news-container .keyword-count {
+    margin-top: 7px;
+
+    color: #A09C94;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   16. 페이지네이션
+========================================================= */
+
+.news-container .pagination {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 35px;
+}
+
+
+.news-container .page-number,
+.news-container .page-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 38px;
+
+    height: 38px;
+
+    padding:
+        0 11px;
+
+    background: #FFFFFF;
+
+    color: #75726B;
+
+    border:
+        1px solid #DEDAD1;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    transition:
+        border-color 0.18s ease,
+        color 0.18s ease,
+        background 0.18s ease;
+}
+
+
+.news-container .page-number:hover,
+.news-container .page-button:hover {
+    border-color: #8EB49A;
+
+    color: #4F8A64;
+
+    background: #F7FBF8;
+}
+
+
+.news-container .page-number.active {
+    background: #4F8A64;
+
+    color: #FFFFFF;
+
+    border-color: #4F8A64;
+
+    font-weight: 700;
+}
+
+
+.news-container .page-info {
+    margin-top: 10px;
+
+    text-align: center;
+
+    color: #A19C93;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   17. 검색 결과 없음
+========================================================= */
+
+.news-container .empty-result {
+    width: 100%;
+
+    padding:
+        70px 30px;
+
+    background: #FFFFFF;
+
+    border:
+        1px solid #E3DED4;
+
+    border-radius: 16px;
+
+    text-align: center;
+}
+
+
+.news-container .empty-result h2 {
+    margin:
+        0 0 8px;
+
+    color: #4A514A;
+
+    font-size: 20px;
+}
+
+
+.news-container .empty-result p {
+    margin: 0;
+
+    color: #99958C;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   18. 화면이 좁아졌을 때
+========================================================= */
+
+@media screen and (max-width: 1200px) {
+
+    .news-page .news-sidebar {
+        width: 260px !important;
+
+        min-width: 260px !important;
+
+        max-width: 260px !important;
+
+        flex-basis: 260px !important;
+    }
+
+
+    .news-container {
+        padding-left: 30px;
+
+        padding-right: 30px;
+    }
+
+
+    .news-container .main-layout {
+        gap: 28px;
+    }
+
+
+    .news-container .analysis-section {
+        width: 280px;
+
+        min-width: 280px;
+
+        max-width: 280px;
+
+        flex-basis: 280px;
+    }
+
+}
+
+
+/* =========================================================
+   19. 더 좁은 화면
+========================================================= */
+
+@media screen and (max-width: 1000px) {
+
+    .news-container .main-layout {
+        display: block;
+    }
+
+
+    .news-container .analysis-section {
+        position: relative;
+
+        top: auto;
+
+        width: 100%;
+
+        min-width: 0;
+
+        max-width: none;
+
+        flex: none;
+
+        margin-top: 30px;
+    }
+
+
+    .news-container .keyword-panel {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   20. 모바일
+========================================================= */
+
+@media screen and (max-width: 900px) {
+
+    .news-page {
+        display: block;
+
+        min-height: 100vh;
+
+        overflow-x: hidden;
+    }
+
+
+    /* -----------------------------------------
+       Sidebar
+    ----------------------------------------- */
+
+    .news-page .news-sidebar {
+        position: relative !important;
+
+        width: 100% !important;
+
+        min-width: 0 !important;
+
+        max-width: none !important;
+
+        min-height: auto !important;
+
+        height: auto !important;
+
+        flex: none !important;
+
+        overflow: visible !important;
+    }
+
+
+    .news-page .news-sidebar .sidebar-inner {
+        position: relative !important;
+
+        top: auto !important;
+
+        min-height: auto;
+
+        padding-bottom: 20px;
+    }
+
+
+    /* -----------------------------------------
+       본문
+    ----------------------------------------- */
+
+    .news-main {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+
+    .news-container {
+        width: 100%;
+
+        padding:
+            30px 20px 60px;
+    }
+
+
+    /* -----------------------------------------
+       제목
+    ----------------------------------------- */
+
+    .news-container .page-title {
+        font-size: 34px;
+
+        letter-spacing: -1px;
+    }
+
+
+    .news-container .page-description {
+        font-size: 16px;
+    }
+
+
+    .news-container .page-period {
+        font-size: 13px;
+    }
+
+
+    /* -----------------------------------------
+       검색
+    ----------------------------------------- */
+
+    .news-container .search-box {
+        padding: 6px;
+    }
+
+
+    .news-container .search-input {
+        min-width: 0;
+
+        padding:
+            10px 11px;
+    }
+
+
+    .news-container .search-button {
+        padding:
+            10px 16px;
+    }
+
+
+    /* -----------------------------------------
+       필터
+    ----------------------------------------- */
+
+    .news-container .filter-row {
+        flex-wrap: wrap;
+    }
+
+
+    .news-container .filter-select {
+        min-width: 0;
+
+        flex: 0 1 auto;
+    }
+
+
+    .news-container .reset-button {
+        margin-left: 0;
+
+        width: 100%;
+
+        margin-top: 4px;
+    }
+
+
+    /* -----------------------------------------
+       연도
+    ----------------------------------------- */
+
+    .news-container .year-filter {
+        gap: 7px;
+
+        margin-top: 20px;
+    }
+
+
+    .news-container .year-button {
+        min-width: 55px;
+
+        padding:
+            8px 14px;
+
+        font-size: 13px;
+    }
+
+
+    /* -----------------------------------------
+       뉴스
+    ----------------------------------------- */
+
+    .news-container .main-layout {
+        display: block;
+
+        width: 100%;
+    }
+
+
+    .news-container .news-section {
+        width: 100%;
+    }
+
+
+    /* -----------------------------------------
+       카드
+    ----------------------------------------- */
+
+    .news-container .news-card {
+        flex-direction: column;
+
+        gap: 14px;
+
+        padding: 16px;
+    }
+
+
+    /* -----------------------------------------
+       이미지
+    ----------------------------------------- */
+
+    .news-container .news-image-box {
+        width: 100%;
+
+        min-width: 0;
+
+        height: 210px;
+    }
+
+
+    /* -----------------------------------------
+       기사
+    ----------------------------------------- */
+
+    .news-container .news-title {
+        font-size: 18px;
+    }
+
+
+    .news-container .news-summary {
+        font-size: 13px;
+    }
+
+
+    /* -----------------------------------------
+       키워드
+    ----------------------------------------- */
+
+    .news-container .analysis-section {
+        position: relative;
+
+        top: auto;
+
+        width: 100%;
+
+        min-width: 0;
+
+        max-width: none;
+
+        margin-top: 35px;
+    }
+
+
+    .news-container .keyword-panel {
+        width: 100%;
+
+        padding:
+            22px 18px;
+    }
+
+}
+
+
+/* =========================================================
+   21. 작은 모바일
+========================================================= */
+
+@media screen and (max-width: 500px) {
+
+    .news-container {
+        padding:
+            24px 14px 50px;
+    }
+
+
+    .news-container .page-title {
+        font-size: 30px;
+    }
+
+
+    .news-container .search-box {
+        flex-direction: column;
+
+        gap: 6px;
+
+        padding: 7px;
+    }
+
+
+    .news-container .search-input {
+        width: 100%;
+
+        min-height: 42px;
+    }
+
+
+    .news-container .search-button {
+        width: 100%;
+
+        min-height: 42px;
+    }
+
+
+    .news-container .filter-row {
+        gap: 6px;
+    }
+
+
+    .news-container .filter-select {
+        flex: 1;
+
+        width: 50%;
+    }
+
+
+    .news-container .news-card {
+        padding: 14px;
+
+        border-radius: 13px;
+    }
+
+
+    .news-container .news-image-box {
+        height: 180px;
+
+        border-radius: 9px;
+    }
+
+
+    .news-container .news-meta {
+        font-size: 12px;
+    }
+
+
+    .news-container .news-title {
+        font-size: 17px;
+    }
+
+
+    .news-container .news-summary {
+        font-size: 13px;
+
+        line-height: 1.7;
+    }
+
+
+    .news-container .pagination {
+        gap: 5px;
+    }
+
+
+    .news-container .page-number,
+    .news-container .page-button {
+        min-width: 34px;
+
+        height: 34px;
+
+        padding:
+            0 9px;
+
+        font-size: 12px;
+    }
+
+}

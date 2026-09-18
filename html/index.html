@@ -1,0 +1,3034 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    고독사 상대적 취약도 지수 분석 플랫폼
+  </title>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+
+<body>
+
+
+  <div class="app">
+
+
+    <!-- =====================================================
+       Sidebar
+  ====================================================== -->
+
+    <aside class="sidebar">
+
+      <div class="logo">
+
+        <h1>
+          고독사 예방 생활권
+        </h1>
+
+        <p>
+          DATA-DRIVEN COMMUNITY PLATFORM
+        </p>
+
+      </div>
+
+
+      <div class="menu">
+
+        <p class="menu-title">
+          DASHBOARD
+        </p>
+
+        <button class="active">
+          종합 현황
+        </button>
+
+        <button>
+          위험지역 분석
+        </button>
+
+        <button>
+          생활권 분석
+        </button>
+
+        <button>
+          복지 사각지대
+        </button>
+
+        <button>
+          예방사업 후보지
+        </button>
+
+        <button onclick="location.href='/news'">
+          외부 사례 분석
+        </button>
+
+      </div>
+
+
+      <div class="menu">
+
+        <p class="menu-title">
+          DATA
+        </p>
+
+        <button>
+          지역별 통계
+        </button>
+
+        <button>
+          시설 데이터
+        </button>
+
+        <button>
+          데이터 갱신 이력
+        </button>
+
+      </div>
+
+
+      <div class="sidebar-footer">
+
+        ※ 본 서비스의 위험도는 공공데이터 및 분석지표를 활용한
+        지역 취약도 지수이며 실제 고독사 발생 확률을 의미하지 않습니다.
+
+      </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+       Main
+  ====================================================== -->
+
+    <main class="main">
+
+
+      <!-- =====================================================
+         상단
+    ====================================================== -->
+
+      <div class="topbar">
+
+        <div class="title">
+
+          <h2>
+            우리 동네 고독사 취약도
+          </h2>
+
+          <p>
+            지역의 인구·복지·의료 관련 지표를 종합적으로 분석합니다.
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =====================================================
+         KPI
+    ====================================================== -->
+
+      <section class="cards">
+
+
+        <div class="card orange">
+
+          <div class="label">
+            1인가구 비율
+          </div>
+
+          <div class="gauge" id="gaugeOnePerson"></div>
+
+          <div class="value" id="onePersonValue">
+            -
+          </div>
+
+          <div class="sub">
+            지역별 비율
+          </div>
+
+        </div>
+
+
+        <div class="card green">
+
+          <div class="label">
+            사회복지 종사자 수 1인당 담당 인구
+          </div>
+
+          <div class="gauge" id="gaugeWelfare"></div>
+
+          <div class="value" id="welfareValue">
+            -
+          </div>
+
+          <div class="sub">
+            1인당 담당인구수
+          </div>
+
+        </div>
+
+
+        <div class="card purple">
+
+          <div class="label">
+            고령인구 비율
+          </div>
+
+          <div class="gauge" id="gaugeElderly"></div>
+
+          <div class="value" id="elderlyValue">
+            -
+          </div>
+
+          <div class="sub">
+            2021년 기준
+          </div>
+
+        </div>
+
+
+        <div class="card green">
+
+          <div class="label">
+            미충족 의료율
+          </div>
+
+          <div class="gauge" id="gaugeLiving"></div>
+
+          <div class="value" id="livingValue">
+            -
+          </div>
+
+          <div class="sub">
+            2021년 기준
+          </div>
+
+        </div>
+
+
+        <!-- 지역 선택 -->
+
+        <div class="region-select-box">
+
+          <span class="select-label">
+            분석 지역 선택
+          </span>
+
+          <select id="regionSelect">
+
+            <option value="서울특별시">
+              서울특별시
+            </option>
+
+            <option value="부산광역시">
+              부산광역시
+            </option>
+
+            <option value="대구광역시">
+              대구광역시
+            </option>
+
+            <option value="인천광역시">
+              인천광역시
+            </option>
+
+            <option value="대전광역시" selected>
+              대전광역시
+            </option>
+
+            <option value="울산광역시">
+              울산광역시
+            </option>
+
+            <option value="세종특별자치시">
+              세종특별자치시
+            </option>
+
+            <option value="경기도">
+              경기도
+            </option>
+
+            <option value="강원특별자치도">
+              강원특별자치도
+            </option>
+
+            <option value="충청북도">
+              충청북도
+            </option>
+
+            <option value="충청남도">
+              충청남도
+            </option>
+
+            <option value="전남광주통합특별시">
+              전남광주통합특별시
+            </option>
+
+            <option value="전북특별자치도">
+              전북특별자치도
+            </option>
+
+            <option value="경상북도">
+              경상북도
+            </option>
+
+            <option value="경상남도">
+              경상남도
+            </option>
+
+            <option value="제주특별자치도">
+              제주특별자치도
+            </option>
+
+          </select>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =====================================================
+         지도 + 종합취약도
+    ====================================================== -->
+
+      <div class="content-grid">
+
+
+        <section class="panel">
+
+          <div class="panel-head">
+
+            <h3>
+              지역 취약도 지도
+            </h3>
+
+            <span id="selectedRegion">
+              대전광역시
+            </span>
+
+          </div>
+
+
+          <div id="map"></div>
+
+
+          <div class="legend">
+
+            <span>
+
+              <i class="dot" style="background:#d9534f"></i>
+
+              높음
+
+            </span>
+
+
+            <span>
+
+              <i class="dot" style="background:#e6a33a"></i>
+
+              주의
+
+            </span>
+
+
+            <span>
+
+              <i class="dot" style="background:#86ad55"></i>
+
+              낮음
+
+            </span>
+
+
+            <span>
+
+              <i class="dot" style="background:#c7ccd1"></i>
+
+              데이터 없음
+
+            </span>
+
+          </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+           종합 취약도
+      ================================================== -->
+
+        <aside class="panel">
+
+          <div class="panel-head">
+
+            <h3>
+              상대적 취약도 지수
+            </h3>
+
+            <span>
+              상관관계 기반 분석
+            </span>
+
+          </div>
+
+
+
+          <div class="score">
+
+            <div class="score-ring" id="scoreRing">
+
+              <div class="score-inner">
+
+                <div class="score-number" id="totalScore">
+                  -
+                </div>
+
+                <div class="score-unit">
+                  / 100
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="risk" id="riskText">
+              분석중
+            </div>
+
+          </div>
+
+
+
+          <div class="metric">
+
+            <div class="metric-row">
+
+              <span>
+                1인가구 비율
+              </span>
+
+              <span id="metricOnePerson">
+                -
+              </span>
+
+            </div>
+
+
+            <div class="bar">
+
+              <i id="barOnePerson" style="
+                 width:0%;
+                 background:#e7a33c;
+               ">
+              </i>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="metric">
+
+            <div class="metric-row">
+
+              <span>
+                고령인구 비율
+              </span>
+
+              <span id="metricElderly">
+                -
+              </span>
+
+            </div>
+
+
+            <div class="bar">
+
+              <i id="barElderly" style="
+                 width:0%;
+                 background:#e7a33c;
+               ">
+              </i>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="metric">
+
+            <div class="metric-row">
+
+              <span>
+                사회복지 종사자 1인당 담당인구수
+              </span>
+
+              <span id="metricWelfare">
+                -
+              </span>
+
+            </div>
+
+
+            <div class="bar">
+
+              <i id="barWelfare" style="
+                 width:0%;
+                 background:#8e6cc2;
+               ">
+              </i>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="metric">
+
+            <div class="metric-row">
+
+              <span>
+                미충족 의료율
+              </span>
+
+              <span id="metricLiving">
+                -
+              </span>
+
+            </div>
+
+
+            <div class="bar">
+
+              <i id="barLiving" style="
+                 width:0%;
+                 background:#98b83f;
+               ">
+              </i>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="notice">
+
+            <strong>
+              분석 요약
+            </strong>
+
+            <br>
+
+            <span id="analysisSummary">
+              지역을 선택하면 데이터 기반 분석 결과가 표시됩니다.
+            </span>
+
+          </div>
+
+
+        </aside>
+
+      </div>
+
+
+
+    </main>
+
+
+  </div>
+
+
+
+  <!-- Leaflet -->
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+  /* =========================================================
+     지도
+  ========================================================= */
+
+  const map =
+    L.map("map")
+      .setView(
+        [36.3504, 127.3845],
+        7
+      );
+
+
+  L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      attribution:
+        "&copy; OpenStreetMap contributors"
+    }
+  ).addTo(map);
+
+
+
+  /* =========================================================
+     지역 좌표
+  ========================================================= */
+
+  const REGION_COORDS = {
+
+    "서울특별시":
+      [37.5665, 126.9780],
+
+    "부산광역시":
+      [35.1796, 129.0756],
+
+    "대구광역시":
+      [35.8715, 128.6015],
+
+    "인천광역시":
+      [37.4563, 126.7052],
+
+    "대전광역시":
+      [36.3504, 127.3845],
+
+    "울산광역시":
+      [35.5395, 129.3116],
+
+    "세종특별자치시":
+      [36.4797, 127.2895],
+
+    "경기도":
+      [37.2893, 127.0535],
+
+    "강원특별자치도":
+      [37.8854, 127.7298],
+
+    "충청북도":
+      [36.6357, 127.4917],
+
+    "충청남도":
+      [36.6581, 126.6714],
+
+    "전남광주통합특별시":
+      [35.05, 126.90],
+
+    "전북특별자치도":
+      [35.8206, 127.1088],
+
+    "경상북도":
+      [36.5760, 128.5056],
+
+    "경상남도":
+      [35.2379, 128.6919],
+
+    "제주특별자치도":
+      [33.4889, 126.4981]
+
+  };
+
+
+
+  /* =========================================================
+     상관계수 가중치
+  ========================================================= */
+
+  const WEIGHTS = {
+
+    medical:
+      0.59 / 1.38,
+
+    elderly:
+      0.39 / 1.38,
+
+    onePerson:
+      0.25 / 1.38,
+
+    welfare:
+      0.15 / 1.38
+
+  };
+
+
+
+  /* =========================================================
+     지역 데이터 캐시
+  ========================================================= */
+
+  let regionDataCache = {};
+
+
+
+  /* =========================================================
+     지도 GeoJSON 레이어
+  ========================================================= */
+
+  let regionGeoJsonLayer = null;
+
+
+
+  /* =========================================================
+     숫자 변환
+  ========================================================= */
+
+  function toNumber(value) {
+
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
+
+      return null;
+
+    }
+
+    const number =
+      Number(value);
+
+    if (
+      Number.isNaN(number)
+    ) {
+
+      return null;
+
+    }
+
+    return number;
+
+  }
+
+
+
+  /* =========================================================
+     지역명 정규화
+     
+     ★ 중요
+     지도는 기존 17개 시도 기준
+     데이터는 전남광주통합특별시 기준
+     
+     따라서 광주 / 전남을 하나의 데이터로 연결
+  ========================================================= */
+
+  function normalizeGeoRegionName(name) {
+
+    if (!name) {
+
+      return null;
+
+    }
+
+
+    const cleanName =
+      String(name)
+        .trim();
+
+
+
+    const mapping = {
+
+      /* 서울 */
+
+      "서울":
+        "서울특별시",
+
+      "서울특별시":
+        "서울특별시",
+
+      "Seoul":
+        "서울특별시",
+
+
+
+      /* 부산 */
+
+      "부산":
+        "부산광역시",
+
+      "부산광역시":
+        "부산광역시",
+
+      "Busan":
+        "부산광역시",
+
+
+
+      /* 대구 */
+
+      "대구":
+        "대구광역시",
+
+      "대구광역시":
+        "대구광역시",
+
+      "Daegu":
+        "대구광역시",
+
+
+
+      /* 인천 */
+
+      "인천":
+        "인천광역시",
+
+      "인천광역시":
+        "인천광역시",
+
+      "Incheon":
+        "인천광역시",
+
+
+
+      /* 대전 */
+
+      "대전":
+        "대전광역시",
+
+      "대전광역시":
+        "대전광역시",
+
+      "Daejeon":
+        "대전광역시",
+
+
+
+      /* 울산 */
+
+      "울산":
+        "울산광역시",
+
+      "울산광역시":
+        "울산광역시",
+
+      "Ulsan":
+        "울산광역시",
+
+
+
+      /* 세종 */
+
+      "세종":
+        "세종특별자치시",
+
+      "세종특별자치시":
+        "세종특별자치시",
+
+      "Sejong":
+        "세종특별자치시",
+
+
+
+      /* 경기 */
+
+      "경기":
+        "경기도",
+
+      "경기도":
+        "경기도",
+
+      "Gyeonggi-do":
+        "경기도",
+
+
+
+      /* 강원 */
+
+      "강원":
+        "강원특별자치도",
+
+      "강원도":
+        "강원특별자치도",
+
+      "강원특별자치도":
+        "강원특별자치도",
+
+      "Gangwon-do":
+        "강원특별자치도",
+
+
+
+      /* 충북 */
+
+      "충북":
+        "충청북도",
+
+      "충청북도":
+        "충청북도",
+
+      "Chungcheongbuk-do":
+        "충청북도",
+
+
+
+      /* 충남 */
+
+      "충남":
+        "충청남도",
+
+      "충청남도":
+        "충청남도",
+
+      "Chungcheongnam-do":
+        "충청남도",
+
+
+
+      /* =====================================================
+         ★ 핵심
+         광주광역시 + 전라남도
+         → 전남광주통합특별시
+      ===================================================== */
+
+      "광주":
+        "전남광주통합특별시",
+
+      "광주광역시":
+        "전남광주통합특별시",
+
+      "Gwangju":
+        "전남광주통합특별시",
+
+      "전남":
+        "전남광주통합특별시",
+
+      "전라남도":
+        "전남광주통합특별시",
+
+      "Jeollanam-do":
+        "전남광주통합특별시",
+
+      "전남광주통합특별시":
+        "전남광주통합특별시",
+
+
+
+      /* 전북 */
+
+      "전북":
+        "전북특별자치도",
+
+      "전라북도":
+        "전북특별자치도",
+
+      "전북특별자치도":
+        "전북특별자치도",
+
+      "Jeollabuk-do":
+        "전북특별자치도",
+
+
+
+      /* 경북 */
+
+      "경북":
+        "경상북도",
+
+      "경상북도":
+        "경상북도",
+
+      "Gyeongsangbuk-do":
+        "경상북도",
+
+
+
+      /* 경남 */
+
+      "경남":
+        "경상남도",
+
+      "경상남도":
+        "경상남도",
+
+      "Gyeongsangnam-do":
+        "경상남도",
+
+
+
+      /* 제주 */
+
+      "제주":
+        "제주특별자치도",
+
+      "제주특별자치도":
+        "제주특별자치도",
+
+      "Jeju":
+        "제주특별자치도"
+
+    };
+
+
+    return (
+      mapping[cleanName] ||
+      cleanName
+    );
+
+  }
+
+
+
+  /* =========================================================
+     GeoJSON 속성에서 지역명 찾기
+  ========================================================= */
+
+  function getGeoRegionName(feature) {
+
+    const properties =
+      feature.properties || {};
+
+
+    const candidates = [
+
+      properties.sidonm,
+
+      properties.SIDONM,
+
+      properties.NAME_1,
+
+      properties.name,
+
+      properties.NAME,
+
+      properties.region,
+
+      properties.REGION,
+
+      properties.adm_nm,
+
+      properties.sido,
+
+      properties.SIDO
+
+    ];
+
+
+    for (
+      const value of candidates
+    ) {
+
+      if (
+        value !== undefined &&
+        value !== null &&
+        String(value).trim() !== ""
+      ) {
+
+        return normalizeGeoRegionName(
+          String(value).trim()
+        );
+
+      }
+
+    }
+
+
+    return null;
+
+  }
+
+
+
+  /* =========================================================
+     위험도 색상
+  ========================================================= */
+
+  function getRiskColor(score) {
+
+    if (
+      score === null ||
+      score === undefined ||
+      Number.isNaN(Number(score))
+    ) {
+
+      return "#c7ccd1";
+
+    }
+
+
+    const value =
+      Number(score);
+
+
+    if (
+      value >= 70
+    ) {
+
+      return "#d9534f";
+
+    }
+
+
+    if (
+      value >= 40
+    ) {
+
+      return "#e6a33a";
+
+    }
+
+
+    return "#86ad55";
+
+  }
+
+
+
+  /* =========================================================
+     GeoJSON 기본 스타일
+  ========================================================= */
+
+  function getGeoJsonStyle(feature) {
+
+    const region =
+      getGeoRegionName(
+        feature
+      );
+
+
+    const data =
+      regionDataCache[region];
+
+
+    let score = null;
+
+
+    if (data) {
+
+      score =
+        calculateTotalScore(
+          data
+        );
+
+    }
+
+
+    return {
+
+      fillColor:
+        getRiskColor(score),
+
+      fillOpacity:
+        0.65,
+
+      color:
+        "#ffffff",
+
+      weight:
+        1.5,
+
+      opacity:
+        1
+
+    };
+
+  }
+
+
+
+  /* =========================================================
+     Hover
+  ========================================================= */
+
+  function highlightFeature(event) {
+
+    const layer =
+      event.target;
+
+
+    layer.setStyle({
+
+      weight:
+        3,
+
+      color:
+        "#333333",
+
+      fillOpacity:
+        0.82
+
+    });
+
+
+    if (
+      !L.Browser.ie &&
+      !L.Browser.opera &&
+      !L.Browser.edge
+    ) {
+
+      layer.bringToFront();
+
+    }
+
+  }
+
+
+
+  /* =========================================================
+     Hover 해제
+  ========================================================= */
+
+  function resetHighlight(event) {
+
+    if (
+      regionGeoJsonLayer
+    ) {
+
+      regionGeoJsonLayer.resetStyle(
+        event.target
+      );
+
+    }
+
+  }
+
+
+
+  /* =========================================================
+     지도 지역 클릭
+     
+     ★ 클릭하면 해당 지역을 선택하고
+       해당 지역으로 자동 확대
+  ========================================================= */
+
+  function onRegionFeatureClick(event) {
+
+    const feature =
+      event.target.feature;
+
+
+    const region =
+      getGeoRegionName(
+        feature
+      );
+
+
+    if (!region) {
+
+      return;
+
+    }
+
+
+    const select =
+      document.getElementById(
+        "regionSelect"
+      );
+
+
+    if (!select) {
+
+      return;
+
+    }
+
+
+    const option =
+      Array.from(
+        select.options
+      )
+        .find(
+          option =>
+            option.value === region
+        );
+
+
+    if (option) {
+
+      select.value =
+        region;
+
+
+      selectRegion();
+
+    }
+
+  }
+
+
+
+  /* =========================================================
+     GeoJSON 이벤트
+  ========================================================= */
+
+  function onEachRegionFeature(
+    feature,
+    layer
+  ) {
+
+    const region =
+      getGeoRegionName(
+        feature
+      );
+
+
+    let score = null;
+
+
+    if (region) {
+
+      const data =
+        regionDataCache[region];
+
+
+      if (data) {
+
+        score =
+          calculateTotalScore(
+            data
+          );
+
+      }
+
+    }
+
+
+    let riskText =
+      "데이터 없음";
+
+
+    if (
+      score !== null
+    ) {
+
+      riskText =
+        getRiskText(
+          score
+        );
+
+    }
+
+
+    layer.bindTooltip(
+
+      region
+        ? `
+      <strong>${region}</strong>
+      <br>
+      종합 취약도:
+      ${score !== null
+          ? score + "점"
+          : "데이터 없음"
+        }
+      <br>
+      위험등급:
+      ${riskText}
+    `
+        : "지역 정보 없음",
+
+      {
+        sticky:
+          true,
+
+        direction:
+          "top"
+
+      }
+
+    );
+
+
+    layer.on({
+
+      mouseover:
+        highlightFeature,
+
+      mouseout:
+        resetHighlight,
+
+      click:
+        onRegionFeatureClick
+
+    });
+
+  }
+
+
+
+  /* =========================================================
+     GeoJSON 지도 생성
+     
+     ★ 기존에 정상적으로 표시되던
+       대한민국 17개 시도 GeoJSON 사용
+  ========================================================= */
+
+  async function loadRegionMap() {
+
+    try {
+
+      /*
+        기존 시도 GeoJSON
+
+        광주 / 전남이 각각 존재함.
+
+        normalizeGeoRegionName()에서
+        둘 다 전남광주통합특별시로 매핑한다.
+      */
+
+      const GEOJSON_URL =
+        "https://raw.githubusercontent.com/southkorea/southkorea-maps/master/kostat/2013/json/skorea_provinces_geo_simple.json";
+
+
+      const response =
+        await fetch(
+          GEOJSON_URL
+        );
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          `GeoJSON 오류: ${response.status}`
+        );
+
+      }
+
+
+      const geojson =
+        await response.json();
+
+
+      console.log(
+        "기존 17개 시도 GeoJSON:",
+        geojson
+      );
+
+
+      if (
+        regionGeoJsonLayer
+      ) {
+
+        map.removeLayer(
+          regionGeoJsonLayer
+        );
+
+      }
+
+
+      regionGeoJsonLayer =
+        L.geoJSON(
+          geojson,
+          {
+
+            style:
+              getGeoJsonStyle,
+
+            onEachFeature:
+              onEachRegionFeature
+
+          }
+        )
+          .addTo(map);
+
+
+      /*
+        전국 전체 표시
+      */
+
+      map.fitBounds(
+        regionGeoJsonLayer.getBounds(),
+        {
+          padding:
+            [20, 20]
+        }
+      );
+
+
+      updateSelectedRegionOnMap();
+
+    }
+    catch (error) {
+
+      console.error(
+        "GeoJSON 지도 로딩 실패:",
+        error
+      );
+
+    }
+
+  }
+
+
+
+  /* =========================================================
+     지도 색상 갱신
+  ========================================================= */
+
+  function refreshRegionMap() {
+
+    if (
+      !regionGeoJsonLayer
+    ) {
+
+      return;
+
+    }
+
+
+    regionGeoJsonLayer.eachLayer(
+      layer => {
+
+        const feature =
+          layer.feature;
+
+
+        const region =
+          getGeoRegionName(
+            feature
+          );
+
+
+        const data =
+          regionDataCache[region];
+
+
+        let score = null;
+
+
+        if (data) {
+
+          score =
+            calculateTotalScore(
+              data
+            );
+
+        }
+
+
+        layer.setStyle({
+
+          fillColor:
+            getRiskColor(score),
+
+          fillOpacity:
+            0.65,
+
+          color:
+            "#ffffff",
+
+          weight:
+            1.5
+
+        });
+
+
+        /*
+          Tooltip 최신화
+        */
+
+        if (
+          layer.getTooltip()
+        ) {
+
+          let riskText =
+            "데이터 없음";
+
+
+          if (
+            score !== null
+          ) {
+
+            riskText =
+              getRiskText(
+                score
+              );
+
+          }
+
+
+          layer.setTooltipContent(
+
+            `
+            <strong>
+              ${region || "지역 정보 없음"}
+            </strong>
+
+            <br>
+
+            종합 취약도:
+            ${score !== null
+              ? score + "점"
+              : "데이터 없음"
+            }
+
+            <br>
+
+            위험등급:
+            ${riskText}
+            `
+
+          );
+
+        }
+
+      }
+    );
+
+
+    updateSelectedRegionOnMap();
+
+  }
+
+
+
+  /* =========================================================
+     선택 지역 강조
+     
+     ★ 선택 지역으로 이동
+     
+     ★ 고정하지 않음
+  ========================================================= */
+
+  function updateSelectedRegionOnMap() {
+
+    if (
+      !regionGeoJsonLayer
+    ) {
+
+      return;
+
+    }
+
+
+    const select =
+      document.getElementById(
+        "regionSelect"
+      );
+
+
+    if (!select) {
+
+      return;
+
+    }
+
+
+    const selected =
+      select.value;
+
+
+    regionGeoJsonLayer.eachLayer(
+      layer => {
+
+        const region =
+          getGeoRegionName(
+            layer.feature
+          );
+
+
+        const data =
+          regionDataCache[region];
+
+
+        let score = null;
+
+
+        if (data) {
+
+          score =
+            calculateTotalScore(
+              data
+            );
+
+        }
+
+
+        /*
+          선택 지역 강조
+        */
+
+        if (
+          region === selected
+        ) {
+
+          layer.setStyle({
+
+            fillColor:
+              getRiskColor(score),
+
+            weight:
+              3,
+
+            color:
+              "#222222",
+
+            fillOpacity:
+              0.82
+
+          });
+
+        }
+        else {
+
+          layer.setStyle({
+
+            fillColor:
+              getRiskColor(score),
+
+            fillOpacity:
+              0.65,
+
+            color:
+              "#ffffff",
+
+            weight:
+              1.5
+
+          });
+
+        }
+
+      }
+    );
+
+
+
+    /*
+      ★ 선택 지역의 실제 지도 영역으로 이동
+    */
+
+    const selectedLayers = [];
+
+
+    regionGeoJsonLayer.eachLayer(
+      layer => {
+
+        const region =
+          getGeoRegionName(
+            layer.feature
+          );
+
+
+        if (
+          region === selected
+        ) {
+
+          selectedLayers.push(
+            layer
+          );
+
+        }
+
+      }
+    );
+
+
+    /*
+      전남광주통합특별시는
+      광주 + 전남 두 폴리곤이므로
+      두 영역을 모두 포함해서 이동
+    */
+
+    if (
+      selectedLayers.length > 0
+    ) {
+
+      const bounds =
+        L.latLngBounds([]);
+
+
+      selectedLayers.forEach(
+        layer => {
+
+          bounds.extend(
+            layer.getBounds()
+          );
+
+        }
+      );
+
+
+      if (
+        bounds.isValid()
+      ) {
+
+        map.fitBounds(
+          bounds,
+          {
+
+            padding:
+              [30, 30],
+
+            maxZoom:
+              9
+
+          }
+        );
+
+      }
+
+    }
+
+  }
+
+
+
+  /* =========================================================
+     전체 지역 데이터
+  ========================================================= */
+
+  async function loadAllRegionData() {
+
+    const select =
+      document.getElementById(
+        "regionSelect"
+      );
+
+
+    if (!select) {
+
+      return;
+
+    }
+
+
+    const regions =
+      Array.from(
+        select.options
+      )
+        .map(
+          option =>
+            option.value
+        );
+
+
+    const results =
+      await Promise.all(
+
+        regions.map(
+          async region => {
+
+            try {
+
+              const response =
+                await fetch(
+                  `/api/region/${encodeURIComponent(region)}`
+                );
+
+
+              if (!response.ok) {
+
+                console.error(
+                  `${region} API 오류:`,
+                  response.status
+                );
+
+
+                return null;
+
+              }
+
+
+              const data =
+                await response.json();
+
+
+              return {
+
+                region,
+                data
+
+              };
+
+            }
+            catch (error) {
+
+              console.error(
+                `${region} 데이터 조회 실패`,
+                error
+              );
+
+
+              return null;
+
+            }
+
+          }
+        )
+
+      );
+
+
+    regionDataCache = {};
+
+
+    results.forEach(
+      result => {
+
+        if (!result) {
+
+          return;
+
+        }
+
+
+        regionDataCache[
+          result.region
+        ] =
+          result.data;
+
+      }
+    );
+
+
+    console.log(
+      "전체 지역 데이터:",
+      regionDataCache
+    );
+
+
+    refreshRegionMap();
+
+  }
+
+
+
+  /* =========================================================
+     최소 / 최대
+  ========================================================= */
+
+  function getMinMax(key) {
+
+    const values = [];
+
+
+    Object.values(
+      regionDataCache
+    )
+      .forEach(
+        data => {
+
+          const value =
+            toNumber(
+              data[key]
+            );
+
+
+          if (
+            value !== null
+          ) {
+
+            values.push(
+              value
+            );
+
+          }
+
+        }
+      );
+
+
+    if (
+      values.length === 0
+    ) {
+
+      return {
+
+        min:
+          0,
+
+        max:
+          100
+
+      };
+
+    }
+
+
+    return {
+
+      min:
+        Math.min(
+          ...values
+        ),
+
+      max:
+        Math.max(
+          ...values
+        )
+
+    };
+
+  }
+
+
+
+  /* =========================================================
+     위험점수 정규화
+  ========================================================= */
+
+  function normalizeRisk(
+    value,
+    min,
+    max
+  ) {
+
+    value =
+      toNumber(
+        value
+      );
+
+
+    if (
+      value === null
+    ) {
+
+      return null;
+
+    }
+
+
+    if (
+      max === min
+    ) {
+
+      return 50;
+
+    }
+
+
+    const score =
+      (
+        (value - min)
+        /
+        (max - min)
+      )
+      * 100;
+
+
+    return Math.max(
+      0,
+      Math.min(
+        100,
+        score
+      )
+    );
+
+  }
+
+
+
+  /* =========================================================
+     종합 취약도
+     
+     ★ 핵심 수정
+     
+     데이터가 없는 지표는 제외하고
+     존재하는 지표의 가중치를
+     다시 100% 기준으로 환산
+  ========================================================= */
+
+  function calculateTotalScore(
+    data
+  ) {
+
+    if (!data) {
+
+      return null;
+
+    }
+
+
+    const indicators = [];
+
+
+    const onePerson =
+      toNumber(
+        data["1인가구비율"]
+      );
+
+
+    const elderly =
+      toNumber(
+        data["고령인구비율"]
+      );
+
+
+    const welfare =
+      toNumber(
+        data["담당인구수"]
+      );
+
+
+    const medical =
+      toNumber(
+        data["미충족의료율"]
+      );
+
+
+
+    if (
+      onePerson !== null
+    ) {
+
+      const range =
+        getMinMax(
+          "1인가구비율"
+        );
+
+
+      const risk =
+        normalizeRisk(
+          onePerson,
+          range.min,
+          range.max
+        );
+
+
+      if (
+        risk !== null
+      ) {
+
+        indicators.push({
+
+          risk,
+          weight:
+            WEIGHTS.onePerson
+
+        });
+
+      }
+
+    }
+
+
+
+    if (
+      elderly !== null
+    ) {
+
+      const range =
+        getMinMax(
+          "고령인구비율"
+        );
+
+
+      const risk =
+        normalizeRisk(
+          elderly,
+          range.min,
+          range.max
+        );
+
+
+      if (
+        risk !== null
+      ) {
+
+        indicators.push({
+
+          risk,
+          weight:
+            WEIGHTS.elderly
+
+        });
+
+      }
+
+    }
+
+
+
+    if (
+      welfare !== null
+    ) {
+
+      const range =
+        getMinMax(
+          "담당인구수"
+        );
+
+
+      const risk =
+        normalizeRisk(
+          welfare,
+          range.min,
+          range.max
+        );
+
+
+      if (
+        risk !== null
+      ) {
+
+        indicators.push({
+
+          risk,
+          weight:
+            WEIGHTS.welfare
+
+        });
+
+      }
+
+    }
+
+
+
+    if (
+      medical !== null
+    ) {
+
+      const range =
+        getMinMax(
+          "미충족의료율"
+        );
+
+
+      const risk =
+        normalizeRisk(
+          medical,
+          range.min,
+          range.max
+        );
+
+
+      if (
+        risk !== null
+      ) {
+
+        indicators.push({
+
+          risk,
+          weight:
+            WEIGHTS.medical
+
+        });
+
+      }
+
+    }
+
+
+
+    /*
+      사용할 수 있는 지표가 하나도 없으면
+      데이터 없음
+    */
+
+    if (
+      indicators.length === 0
+    ) {
+
+      return null;
+
+    }
+
+
+
+    /*
+      ★ 실제 존재하는 지표의 가중치 합
+    */
+
+    const totalWeight =
+      indicators.reduce(
+        (
+          sum,
+          item
+        ) =>
+          sum +
+          item.weight,
+
+        0
+      );
+
+
+
+    /*
+      ★ 가중치 재분배
+    */
+
+    const totalScore =
+      indicators.reduce(
+        (
+          sum,
+          item
+        ) =>
+
+          sum +
+
+          (
+            item.risk
+            *
+            (
+              item.weight
+              /
+              totalWeight
+            )
+          ),
+
+        0
+      );
+
+
+    return Math.round(
+      totalScore
+    );
+
+  }
+
+
+
+  /* =========================================================
+     게이지
+  ========================================================= */
+
+  function setGauge(
+    elementId,
+    value,
+    color
+  ) {
+
+    const gauge =
+      document.getElementById(
+        elementId
+      );
+
+
+    if (
+      !gauge ||
+      value === null ||
+      value === undefined
+    ) {
+
+      return;
+
+    }
+
+
+    const score =
+      Math.max(
+        0,
+        Math.min(
+          100,
+          Number(value)
+        )
+      );
+
+
+    const degree =
+      180 *
+      score /
+      100;
+
+
+    gauge.style.background =
+      `conic-gradient(
+        from 270deg at 50% 100%,
+        ${color} 0deg ${degree}deg,
+        #d9dee3 ${degree}deg 180deg
+      )`;
+
+  }
+
+
+
+  /* =========================================================
+     막대
+     
+     ★ 위험도에 따라 색상 자동 변경
+  ========================================================= */
+
+  function setBar(
+    elementId,
+    value
+  ) {
+
+    const bar =
+      document.getElementById(
+        elementId
+      );
+
+
+    if (
+      !bar ||
+      value === null ||
+      value === undefined
+    ) {
+
+      return;
+
+    }
+
+
+    const score =
+      Math.max(
+        0,
+        Math.min(
+          100,
+          Number(value)
+        )
+      );
+
+
+    bar.style.width =
+      `${score}%`;
+
+
+    /*
+      종합 취약도 지도와
+      동일한 색상 사용
+    */
+
+    bar.style.background =
+      getRiskColor(
+        score
+      );
+
+  }
+
+
+
+  /* =========================================================
+     종합점수 링
+     
+     ★ 지도 색상과 동일
+  ========================================================= */
+
+  function setTotalScoreRing(
+    score
+  ) {
+
+    const ring =
+      document.getElementById(
+        "scoreRing"
+      );
+
+
+    if (
+      !ring ||
+      score === null ||
+      score === undefined
+    ) {
+
+      return;
+
+    }
+
+
+    const safeScore =
+      Math.max(
+        0,
+        Math.min(
+          100,
+          Number(score)
+        )
+      );
+
+
+    const degree =
+      360 *
+      (
+        safeScore /
+        100
+      );
+
+
+    const color =
+      getRiskColor(
+        safeScore
+      );
+
+
+    ring.style.background =
+      `conic-gradient(
+        ${color} 0deg ${degree}deg,
+        #e3e7eb ${degree}deg 360deg
+      )`;
+
+  }
+
+
+
+  /* =========================================================
+     위험등급
+  ========================================================= */
+
+  function getRiskText(
+    score
+  ) {
+
+    if (
+      score >= 70
+    ) {
+
+      return "높음";
+
+    }
+
+
+    if (
+      score >= 40
+    ) {
+
+      return "주의";
+
+    }
+
+
+    return "낮음";
+
+  }
+
+
+
+  /* =========================================================
+     지역 데이터 표시
+  ========================================================= */
+
+  async function loadRegionData(
+    region
+  ) {
+
+    try {
+
+      if (
+        Object.keys(
+          regionDataCache
+        ).length === 0
+      ) {
+
+        await loadAllRegionData();
+
+      }
+
+
+      let data =
+        regionDataCache[
+        region
+        ];
+
+
+      if (!data) {
+
+        const response =
+          await fetch(
+            `/api/region/${encodeURIComponent(region)}`
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            `API 오류: ${response.status}`
+          );
+
+        }
+
+
+        data =
+          await response.json();
+
+
+        regionDataCache[
+          region
+        ] =
+          data;
+
+      }
+
+
+      console.log(
+        "현재 지역 DB 응답:",
+        data
+      );
+
+
+
+      const onePerson =
+        toNumber(
+          data["1인가구비율"]
+        );
+
+
+      const elderly =
+        toNumber(
+          data["고령인구비율"]
+        );
+
+
+      const welfare =
+        toNumber(
+          data["담당인구수"]
+        );
+
+
+      const medical =
+        toNumber(
+          data["미충족의료율"]
+        );
+
+
+
+      const onePersonRange =
+        getMinMax(
+          "1인가구비율"
+        );
+
+
+      const elderlyRange =
+        getMinMax(
+          "고령인구비율"
+        );
+
+
+      const welfareRange =
+        getMinMax(
+          "담당인구수"
+        );
+
+
+      const medicalRange =
+        getMinMax(
+          "미충족의료율"
+        );
+
+
+
+      const onePersonRisk =
+        normalizeRisk(
+          onePerson,
+          onePersonRange.min,
+          onePersonRange.max
+        );
+
+
+      const elderlyRisk =
+        normalizeRisk(
+          elderly,
+          elderlyRange.min,
+          elderlyRange.max
+        );
+
+
+      const welfareRisk =
+        normalizeRisk(
+          welfare,
+          welfareRange.min,
+          welfareRange.max
+        );
+
+
+      const medicalRisk =
+        normalizeRisk(
+          medical,
+          medicalRange.min,
+          medicalRange.max
+        );
+
+
+
+      /* =====================================================
+         1인가구
+      ===================================================== */
+
+      if (
+        onePerson !== null
+      ) {
+
+        document.getElementById(
+          "onePersonValue"
+        ).textContent =
+          `${onePerson}%`;
+
+
+        document.getElementById(
+          "metricOnePerson"
+        ).textContent =
+          `${onePerson}%`;
+
+
+        setGauge(
+          "gaugeOnePerson",
+          onePerson,
+          "#efb34a"
+        );
+
+
+        setBar(
+          "barOnePerson",
+          onePersonRisk
+        );
+
+      }
+
+
+
+      /* =====================================================
+         고령
+      ===================================================== */
+
+      if (
+        elderly !== null
+      ) {
+
+        document.getElementById(
+          "elderlyValue"
+        ).textContent =
+          `${elderly}%`;
+
+
+        document.getElementById(
+          "metricElderly"
+        ).textContent =
+          `${elderly}%`;
+
+
+        setGauge(
+          "gaugeElderly",
+          elderly,
+          "#e7a33c"
+        );
+
+
+        setBar(
+          "barElderly",
+          elderlyRisk
+        );
+
+      }
+      else {
+
+        document.getElementById(
+          "elderlyValue"
+        ).textContent =
+          "-";
+
+
+        document.getElementById(
+          "metricElderly"
+        ).textContent =
+          "-";
+
+      }
+
+
+
+      /* =====================================================
+         복지
+      ===================================================== */
+
+      if (
+        welfare !== null
+      ) {
+
+        document.getElementById(
+          "welfareValue"
+        ).textContent =
+          `${welfare}명`;
+
+
+        document.getElementById(
+          "metricWelfare"
+        ).textContent =
+          `${welfare}명`;
+
+
+        setGauge(
+          "gaugeWelfare",
+          welfareRisk,
+          "#8e6cc2"
+        );
+
+
+        setBar(
+          "barWelfare",
+          welfareRisk
+        );
+
+      }
+
+
+
+      /* =====================================================
+         의료
+      ===================================================== */
+
+      if (
+        medical !== null
+      ) {
+
+        document.getElementById(
+          "livingValue"
+        ).textContent =
+          `${medical}%`;
+
+
+        document.getElementById(
+          "metricLiving"
+        ).textContent =
+          `${medical}%`;
+
+
+        setGauge(
+          "gaugeLiving",
+          medical,
+          "#98b83f"
+        );
+
+
+        setBar(
+          "barLiving",
+          medicalRisk
+        );
+
+      }
+      else {
+
+        document.getElementById(
+          "livingValue"
+        ).textContent =
+          "-";
+
+
+        document.getElementById(
+          "metricLiving"
+        ).textContent =
+          "-";
+
+      }
+
+
+
+      /* =====================================================
+         종합점수
+      ===================================================== */
+
+      const totalScore =
+        calculateTotalScore(
+          data
+        );
+
+
+      if (
+        totalScore !== null
+      ) {
+
+        document.getElementById(
+          "totalScore"
+        ).textContent =
+          totalScore;
+
+
+        setTotalScoreRing(
+          totalScore
+        );
+
+
+        document.getElementById(
+          "riskText"
+        ).textContent =
+          getRiskText(
+            totalScore
+          );
+
+      }
+      else {
+
+        document.getElementById(
+          "totalScore"
+        ).textContent =
+          "-";
+
+
+        document.getElementById(
+          "riskText"
+        ).textContent =
+          "데이터 없음";
+
+      }
+
+
+
+      /* =====================================================
+         분석 요약
+      ===================================================== */
+
+      const summary =
+        document.getElementById(
+          "analysisSummary"
+        );
+
+
+      if (
+        summary
+      ) {
+
+        summary.textContent =
+
+          `${region}의 1인가구 비율은 `
+          +
+          `${onePerson ?? "-"}%, `
+          +
+
+          `고령인구 비율은 `
+          +
+          `${elderly ?? "-"}%, `
+          +
+
+          `미충족 의료율은 `
+          +
+          `${medical ?? "-"}%, `
+          +
+
+          `사회복지 종사자 1인당 담당인구수는 `
+          +
+          `${welfare ?? "-"}명입니다. `
+          +
+
+          `상관계수 기반 종합취약도는 `
+          +
+          `${totalScore ?? "-"}점으로 분석됩니다.`;
+
+      }
+
+
+
+      refreshRegionMap();
+
+    }
+    catch (error) {
+
+      console.error(
+        "지역 데이터 조회 실패:",
+        error
+      );
+
+
+      const summary =
+        document.getElementById(
+          "analysisSummary"
+        );
+
+
+      if (
+        summary
+      ) {
+
+        summary.textContent =
+          "데이터를 불러오는 중 오류가 발생했습니다.";
+
+      }
+
+    }
+
+  }
+
+
+
+  /* =========================================================
+     지역 선택
+     
+     ★ 선택된 지역으로 자동 이동
+  ========================================================= */
+
+  async function selectRegion() {
+
+    const select =
+      document.getElementById(
+        "regionSelect"
+      );
+
+
+    if (!select) {
+
+      return;
+
+    }
+
+
+    const region =
+      select.value;
+
+
+    const selectedRegion =
+      document.getElementById(
+        "selectedRegion"
+      );
+
+
+    if (
+      selectedRegion
+    ) {
+
+      selectedRegion.textContent =
+        region;
+
+    }
+
+
+    await loadRegionData(
+      region
+    );
+
+
+    updateSelectedRegionOnMap();
+
+  }
+
+
+
+  /* =========================================================
+     지역 변경 이벤트
+  ========================================================= */
+
+  document
+    .getElementById(
+      "regionSelect"
+    )
+    .addEventListener(
+      "change",
+      selectRegion
+    );
+
+
+
+  /* =========================================================
+     최초 실행
+  ========================================================= */
+
+  (async function init() {
+
+    try {
+
+      await loadAllRegionData();
+
+      await loadRegionMap();
+
+      await selectRegion();
+
+    }
+    catch (error) {
+
+      console.error(
+        "초기 데이터 로딩 실패:",
+        error
+      );
+
+    }
+
+  })();
+
+</script>
+
+</body>
+
+</html>

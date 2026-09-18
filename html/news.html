@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>외부 사례 분석</title>
+
+    <!-- 공통 메인 CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- 뉴스 전용 CSS -->
+    <link rel="stylesheet" href="/css/news.css">
+
+</head>
+
+
+<body>
+
+    <div class="news-page">
+
+
+        <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+        <aside class="sidebar news-sidebar">
+
+            <div class="sidebar-inner">
+
+
+                <!-- =================================================
+                 LOGO
+            ================================================== -->
+
+                <div class="logo">
+
+                    <h1>
+                        고독사 예방 생활권
+                    </h1>
+
+                    <p>
+                        DATA-DRIVEN COMMUNITY PLATFORM
+                    </p>
+
+                </div>
+
+
+                <!-- =================================================
+                 DASHBOARD
+            ================================================== -->
+
+                <div class="menu">
+
+                    <p class="menu-title">
+                        DASHBOARD
+                    </p>
+
+
+                    <button type="button" onclick="location.href='/'">
+                        종합 현황
+                    </button>
+
+
+                    <button type="button" onclick="alert('위험지역 분석 페이지는 준비 중입니다.')">
+                        위험지역 분석
+                    </button>
+
+
+                    <button type="button" onclick="alert('생활권 분석 페이지는 준비 중입니다.')">
+                        생활권 분석
+                    </button>
+
+
+                    <button type="button" onclick="alert('복지 사각지대 페이지는 준비 중입니다.')">
+                        복지 사각지대
+                    </button>
+
+
+                    <button type="button" onclick="alert('예방사업 후보지 페이지는 준비 중입니다.')">
+                        예방사업 후보지
+                    </button>
+
+
+                    <button type="button" class="active" onclick="location.href='/news'">
+                        외부 사례 분석
+                    </button>
+
+                </div>
+
+
+                <!-- =================================================
+                 DATA
+            ================================================== -->
+
+                <div class="menu">
+
+                    <p class="menu-title">
+                        DATA
+                    </p>
+
+
+                    <button type="button" onclick="alert('지역별 통계 페이지는 준비 중입니다.')">
+                        지역별 통계
+                    </button>
+
+
+                    <button type="button" onclick="alert('시설 데이터 페이지는 준비 중입니다.')">
+                        시설 데이터
+                    </button>
+
+
+                    <button type="button" onclick="alert('데이터 갱신 이력 페이지는 준비 중입니다.')">
+                        데이터 갱신 이력
+                    </button>
+
+                </div>
+
+
+                <!-- =================================================
+                 FOOTER
+            ================================================== -->
+
+                <div class="sidebar-footer">
+
+                    ※ 본 서비스의 위험도는 공공데이터 및 분석지표를 활용한
+                    지역 취약도 지수이며 실제 고독사 발생 확률을 의미하지 않습니다.
+
+                </div>
+
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- =====================================================
+         NEWS CONTENT
+    ====================================================== -->
+
+        <main class="news-main">
+
+
+            <div class="news-container">
+
+
+                <!-- =================================================
+                 1. 페이지 헤더
+            ================================================== -->
+
+                <header class="page-header">
+
+                    <h1 class="page-title">
+                        외부 사례 분석 (살핌 정보)
+                    </h1>
+
+
+                    <p class="page-description">
+                        고립과 돌봄에 관한 기록
+                    </p>
+
+
+                    <p class="page-period">
+                        2019~2021 고독사 관련 데이터를 통해
+                        사회적 고립과 돌봄 이슈의 흐름을 살펴봅니다
+                    </p>
+
+
+                    <p class="total-count">
+                        분석 뉴스 {{ total_count }}건
+                    </p>
+
+                </header>
+
+
+
+                <!-- =================================================
+                 2. 검색 / 필터
+            ================================================== -->
+
+                <form action="/news" method="get" class="search-area">
+
+
+                    <!-- 선택된 연도 유지 -->
+
+                    {% if selected_year %}
+
+                    <input type="hidden" name="year" value="{{ selected_year }}">
+
+                    {% endif %}
+
+
+
+                    <!-- =================================================
+                     검색창
+                ================================================== -->
+
+                    <div class="search-box">
+
+                        <input type="text" name="keyword" value="{{ keyword }}" class="search-input"
+                            placeholder="기사 제목이나 내용에서 검색해보세요">
+
+
+                        <button type="submit" class="search-button">
+                            검색
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                     언론사 / 정렬
+                ================================================== -->
+
+                    <div class="filter-row">
+
+
+                        <!-- 언론사 -->
+
+                        <select name="press" class="filter-select" onchange="this.form.submit()">
+
+                            <option value="">
+                                전체 언론사
+                            </option>
+
+
+                            {% for press in press_list %}
+
+                            <option value="{{ press }}" {% if selected_press==press %}selected{% endif %}>
+                                {{ press }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+
+
+                        <!-- 정렬 -->
+
+                        <select name="sort" class="filter-select" onchange="this.form.submit()">
+
+                            <option value="latest" {% if selected_sort=='latest' %}selected{% endif %}>
+                                최신순
+                            </option>
+
+
+                            <option value="oldest" {% if selected_sort=='oldest' %}selected{% endif %}>
+                                오래된순
+                            </option>
+
+                        </select>
+
+
+
+                        <!-- 초기화 -->
+
+                        {% if keyword or selected_press %}
+
+                        <a href="{{ url_for(
+                            'news',
+                            year=selected_year
+                        ) }}" class="reset-button">
+                            조건 초기화
+                        </a>
+
+                        {% endif %}
+
+                    </div>
+
+                </form>
+
+
+
+                <!-- =================================================
+                 3. 연도 필터
+            ================================================== -->
+
+                <div class="year-filter">
+
+
+                    <!-- 전체 -->
+
+                    <a href="{{ url_for(
+                        'news',
+                        keyword=keyword,
+                        press=selected_press,
+                        sort=selected_sort
+                    ) }}" class="year-button
+                    {% if not selected_year %}active{% endif %}">
+                        전체
+                    </a>
+
+
+
+                    <!-- 2019 -->
+
+                    <a href="{{ url_for(
+                        'news',
+                        year=2019,
+                        keyword=keyword,
+                        press=selected_press,
+                        sort=selected_sort
+                    ) }}" class="year-button
+                    {% if selected_year == '2019' %}active{% endif %}">
+                        2019
+                    </a>
+
+
+
+                    <!-- 2020 -->
+
+                    <a href="{{ url_for(
+                        'news',
+                        year=2020,
+                        keyword=keyword,
+                        press=selected_press,
+                        sort=selected_sort
+                    ) }}" class="year-button
+                    {% if selected_year == '2020' %}active{% endif %}">
+                        2020
+                    </a>
+
+
+
+                    <!-- 2021 -->
+
+                    <a href="{{ url_for(
+                        'news',
+                        year=2021,
+                        keyword=keyword,
+                        press=selected_press,
+                        sort=selected_sort
+                    ) }}" class="year-button
+                    {% if selected_year == '2021' %}active{% endif %}">
+                        2021
+                    </a>
+
+                </div>
+
+
+
+                <!-- =================================================
+                 4. 검색 결과 정보
+            ================================================== -->
+
+                <div class="result-info">
+
+                    {% if keyword %}
+
+                    <span class="result-keyword">
+                        '{{ keyword }}'
+                    </span>
+
+                    검색 결과
+
+                    {% else %}
+
+                    현재 뉴스
+
+                    {% endif %}
+
+
+                    <strong>
+                        {{ result_count }}건
+                    </strong>
+
+                </div>
+
+
+
+                <!-- =================================================
+                 5. 뉴스 + 키워드
+            ================================================== -->
+
+                <div class="main-layout">
+
+
+                    <!-- =================================================
+                     NEWS
+                ================================================== -->
+
+                    <section class="news-section">
+
+
+                        {% if news_list %}
+
+
+                        <div class="news-list">
+
+
+                            {% for news in news_list %}
+
+
+                            <article class="news-card">
+
+
+                                <!-- =====================================
+                                 기사 이미지
+                            ====================================== -->
+
+                                {% if news[7] %}
+
+                                <div class="news-image-box">
+
+                                    <img src="{{ news[7] }}" alt="{{ news[4] }}" class="news-image" loading="lazy">
+
+                                </div>
+
+
+                                {% else %}
+
+                                <div class="news-image-box no-image">
+
+                                    <span>
+                                        살핌 뉴스
+                                    </span>
+
+                                </div>
+
+                                {% endif %}
+
+
+
+                                <!-- =====================================
+                                 기사 내용
+                            ====================================== -->
+
+                                <div class="news-content">
+
+
+                                    <!-- 메타 정보 -->
+
+                                    <div class="news-meta">
+
+                                        {{ news[1] }}년
+
+                                        ·
+
+                                        {{ news[2] }}
+
+                                        {% if news[3] %}
+
+                                        ·
+
+                                        {{ news[3] }}
+
+                                        {% endif %}
+
+                                    </div>
+
+
+
+                                    <!-- 제목 -->
+
+                                    <h2 class="news-title">
+                                        {{ news[4] }}
+                                    </h2>
+
+
+
+                                    <!-- 요약 -->
+
+                                    <p class="news-summary">
+                                        {{ news[5] }}
+                                    </p>
+
+
+
+                                    <!-- 원문 -->
+
+                                    {% if news[6] %}
+
+                                    <a href="{{ news[6] }}" target="_blank" rel="noopener noreferrer" class="news-link">
+                                        기사 원문 보기
+                                    </a>
+
+                                    {% endif %}
+
+
+                                </div>
+
+                            </article>
+
+
+                            {% endfor %}
+
+
+                        </div>
+
+
+
+                        <!-- =================================================
+                         페이지네이션
+                    ================================================== -->
+
+                        <nav class="pagination" aria-label="뉴스 페이지 이동">
+
+
+                            <!-- 이전 -->
+
+                            {% if page > 1 %}
+
+                            <a href="{{ url_for(
+                                'news',
+                                year=selected_year,
+                                keyword=keyword,
+                                press=selected_press,
+                                sort=selected_sort,
+                                page=page-1
+                            ) }}" class="page-button">
+                                이전
+                            </a>
+
+                            {% endif %}
+
+
+
+                            <!-- 페이지 번호 -->
+
+                            {% for page_number in page_numbers %}
+
+                            <a href="{{ url_for(
+                                'news',
+                                year=selected_year,
+                                keyword=keyword,
+                                press=selected_press,
+                                sort=selected_sort,
+                                page=page_number
+                            ) }}" class="page-number
+                            {% if page_number == page %}active{% endif %}">
+                                {{ page_number }}
+                            </a>
+
+                            {% endfor %}
+
+
+
+                            <!-- 다음 -->
+
+                            {% if page < total_pages %} <a href="{{ url_for(
+                                'news',
+                                year=selected_year,
+                                keyword=keyword,
+                                press=selected_press,
+                                sort=selected_sort,
+                                page=page+1
+                            ) }}" class="page-button">
+                                다음
+                                </a>
+
+                                {% endif %}
+
+
+                        </nav>
+
+
+
+                        <!-- 페이지 정보 -->
+
+                        <div class="page-info">
+
+                            {{ page }}
+                            /
+                            {{ total_pages }}
+                            페이지
+
+                        </div>
+
+
+                        {% else %}
+
+
+                        <!-- =================================================
+                         검색 결과 없음
+                    ================================================== -->
+
+                        <div class="empty-result">
+
+                            <h2>
+                                검색 결과가 없습니다
+                            </h2>
+
+                            <p>
+                                다른 검색어나 조건으로 다시 찾아보세요
+                            </p>
+
+                        </div>
+
+
+                        {% endif %}
+
+
+                    </section>
+
+
+
+                    <!-- =================================================
+                     KEYWORD
+                ================================================== -->
+
+                    <aside class="analysis-section">
+
+
+                        <div class="keyword-panel">
+
+
+                            <h2 class="keyword-title">
+
+                                {% if selected_year %}
+
+                                {{ selected_year }}년 주요 키워드
+
+                                {% else %}
+
+                                뉴스 속 주요 키워드
+
+                                {% endif %}
+
+                            </h2>
+
+
+
+                            <div class="keyword-cloud">
+
+
+                                {% for keyword_item in keyword_data %}
+
+
+                                <div class="keyword-item">
+
+
+                                    <div class="keyword-word" style="font-size: {{ keyword_item['font_size'] }}px;">
+                                        {{ keyword_item["word"] }}
+                                    </div>
+
+
+                                    <div class="keyword-count">
+                                        {{ keyword_item["count"] }}회
+                                    </div>
+
+
+                                </div>
+
+
+                                {% endfor %}
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </aside>
+
+
+                </div>
+
+
+            </div>
+
+
+        </main>
+
+
+    </div>
+
+
+</body>
+
+</html>

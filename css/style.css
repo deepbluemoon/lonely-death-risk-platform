@@ -1,0 +1,903 @@
+/* =========================================================
+   전체
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+
+    font-family:
+        Pretendard,
+        "Noto Sans KR",
+        Arial,
+        sans-serif;
+
+    background: #f4f6f8;
+
+    color: #20242a;
+}
+
+
+/* =========================================================
+   전체 앱
+========================================================= */
+
+.app {
+    min-height: 100vh;
+
+    display: grid;
+
+    grid-template-columns:
+        280px 1fr;
+}
+
+
+/* =========================================================
+   Sidebar
+========================================================= */
+
+.sidebar {
+    background: #171a1f;
+
+    color: #fff;
+
+    padding: 24px 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 26px;
+}
+
+
+.logo {
+    padding:
+        4px 10px 18px;
+
+    border-bottom:
+        1px solid #30343b;
+}
+
+
+.logo h1 {
+    margin: 0;
+
+    font-size: 20px;
+
+    letter-spacing: -0.7px;
+}
+
+
+.logo p {
+    margin:
+        7px 0 0;
+
+    color: #9da4ae;
+
+    font-size: 12px;
+}
+
+
+.menu-title {
+    color: #737b86;
+
+    font-size: 11px;
+
+    margin:
+        0 10px 8px;
+}
+
+
+.menu button {
+    width: 100%;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #c8cdd4;
+
+    padding:
+        12px;
+
+    text-align: left;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    margin-bottom: 4px;
+}
+
+
+.menu button:hover,
+.menu button.active {
+    background: #2b3037;
+
+    color: #fff;
+}
+
+
+.sidebar-footer {
+    margin-top: auto;
+
+    padding:
+        14px 10px;
+
+    border-top:
+        1px solid #30343b;
+
+    color: #858d98;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   Main
+========================================================= */
+
+.main {
+    padding: 24px;
+
+    overflow: auto;
+}
+
+
+.topbar {
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        flex-start;
+
+    margin-bottom: 20px;
+}
+
+
+.title h2 {
+    margin: 0;
+
+    font-size: 26px;
+
+    letter-spacing: -1px;
+}
+
+
+.title p {
+    margin:
+        7px 0 0;
+
+    color: #737b86;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   KPI Cards
+========================================================= */
+
+.cards {
+    display: grid;
+
+    /*
+   * 4개 KPI + 지역선택
+   */
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr)) 310px;
+
+    gap: 14px;
+
+    margin-bottom: 16px;
+
+    width: 100%;
+}
+
+
+.card {
+    background: #fff;
+
+    border:
+        1px solid #e1e5ea;
+
+    border-radius: 10px;
+
+    padding: 17px;
+
+    min-height: 148px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.card .label {
+    color: #707782;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    margin-bottom: 9px;
+}
+
+
+/* =========================================================
+   Gauge
+========================================================= */
+
+.gauge {
+    width: 94px;
+
+    height: 47px;
+
+    margin:
+        4px auto 8px;
+
+    border-radius:
+        86px 86px 0 0;
+
+    background:
+        conic-gradient(from 270deg at 50% 100%,
+            #efb34a 0deg 90deg,
+            #d9dee3 90deg 180deg);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.gauge::after {
+    content: "";
+
+    position: absolute;
+
+    left: 9px;
+
+    right: 9px;
+
+    bottom: -1px;
+
+    height: 35px;
+
+    background: #fff;
+
+    border-radius:
+        70px 70px 0 0;
+}
+
+
+/* =========================================================
+   KPI Value
+========================================================= */
+
+.value {
+    text-align: center;
+
+    font-size: 27px;
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    margin-top: -3px;
+}
+
+
+.sub {
+    text-align: center;
+
+    color: #9299a2;
+
+    font-size: 10px;
+
+    margin-top: 5px;
+}
+
+
+/* =========================================================
+   Card 색상
+========================================================= */
+
+.card.red {
+    border-top:
+        4px solid #e56c64;
+}
+
+
+.card.orange {
+    border-top:
+        4px solid #e8a73d;
+}
+
+
+.card.green {
+    border-top:
+        4px solid #98b83f;
+}
+
+
+.card.purple {
+    border-top:
+        4px solid #a879d4;
+}
+
+
+/* =========================================================
+   지역 선택 박스
+========================================================= */
+
+.region-select-box {
+    height: 148px;
+
+    width: 310px;
+
+    background: #fff;
+
+    border:
+        1px solid #e1e5ea;
+
+    border-radius: 10px;
+
+    padding: 17px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 10px;
+}
+
+
+.select-label {
+    color: #707782;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.region-select-box select {
+    width: 100%;
+
+    height: 45px;
+
+    border:
+        1px solid #d7dce2;
+
+    border-radius: 8px;
+
+    padding:
+        0 13px;
+
+    background: #fff;
+
+    color: #20242a;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    outline: none;
+}
+
+
+.region-select-box select:hover {
+    border-color:
+        #b8bec6;
+}
+
+
+.region-select-box select:focus {
+    border-color:
+        #8e6cc2;
+}
+
+
+/* =========================================================
+   Map + Right Panel
+========================================================= */
+
+.content-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr) 310px;
+
+    gap: 16px;
+
+    align-items: stretch;
+}
+
+
+.content-grid>.panel {
+    height: 100%;
+}
+
+
+.content-grid>aside.panel {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.content-grid>aside.panel .score {
+    flex:
+        0 0 auto;
+}
+
+
+.content-grid>aside.panel .notice {
+    margin-top: auto;
+}
+
+
+/* =========================================================
+   Panel
+========================================================= */
+
+.panel {
+    background: #fff;
+
+    border:
+        1px solid #e1e5ea;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+
+.panel-head {
+    padding:
+        15px 17px;
+
+    border-bottom:
+        1px solid #e8ebef;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+}
+
+
+.panel-head h3 {
+    margin: 0;
+
+    font-size: 15px;
+}
+
+
+.panel-head span {
+    color: #8b929b;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   지도
+========================================================= */
+
+#map {
+    height: 535px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   종합 취약도
+========================================================= */
+
+.score {
+    padding: 20px;
+
+    text-align: center;
+}
+
+
+.score-ring {
+    width: 145px;
+
+    height: 145px;
+
+    margin:
+        4px auto 16px;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(#e7a33c 0deg 266deg,
+            #edf0f2 266deg 360deg);
+
+    display: grid;
+
+    place-items: center;
+
+    position: relative;
+}
+
+
+.score-ring::before {
+    content: "";
+
+    width: 112px;
+
+    height: 112px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    position: absolute;
+}
+
+
+.score-inner {
+    position: relative;
+
+    z-index: 1;
+}
+
+
+.score-number {
+    font-size: 34px;
+
+    font-weight: 900;
+}
+
+
+.score-unit {
+    font-size: 11px;
+
+    color: #9299a2;
+}
+
+
+/* =========================================================
+   위험도
+========================================================= */
+
+.risk {
+    display: inline-block;
+
+    background: #fff1d8;
+
+    color: #b27617;
+
+    border-radius: 20px;
+
+    padding:
+        6px 12px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   Metric
+========================================================= */
+
+.metric {
+    padding:
+        13px 18px;
+
+    border-top:
+        1px solid #edf0f2;
+}
+
+
+.metric-row {
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    font-size: 12px;
+
+    margin-bottom: 7px;
+}
+
+
+.metric-row span:last-child {
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   Progress Bar
+========================================================= */
+
+.bar {
+    height: 7px;
+
+    background: #edf0f2;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+
+.bar i {
+    display: block;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    transition:
+        width 0.4s ease;
+}
+
+
+/* =========================================================
+   분석 요약
+========================================================= */
+
+.notice {
+    margin:
+        15px 18px 18px;
+
+    background: #f7f8fa;
+
+    border-radius: 8px;
+
+    padding: 12px;
+
+    font-size: 11px;
+
+    color: #69717b;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   지도 Legend
+========================================================= */
+
+.legend {
+    display: flex;
+
+    gap: 12px;
+
+    padding:
+        11px 16px;
+
+    border-top:
+        1px solid #e8ebef;
+
+    font-size: 10px;
+
+    color: #777f88;
+}
+
+
+.dot {
+    width: 8px;
+
+    height: 8px;
+
+    border-radius: 50%;
+
+    display: inline-block;
+
+    margin-right: 4px;
+}
+
+
+/* =========================================================
+   Bottom
+========================================================= */
+
+.bottom {
+    margin-top: 16px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 16px;
+}
+
+
+.chart {
+    padding: 17px;
+
+    height: 245px;
+}
+
+
+.fake-chart {
+    height: 175px;
+
+    display: flex;
+
+    align-items: end;
+
+    gap: 10px;
+
+    padding:
+        15px 8px 0;
+
+    border-bottom:
+        1px solid #dfe3e7;
+}
+
+
+.bar-col {
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 6px;
+
+    height: 100%;
+
+    justify-content: end;
+}
+
+
+.bar-col i {
+    width: 70%;
+
+    background: #d8a64c;
+
+    border-radius:
+        5px 5px 0 0;
+
+    min-height: 8px;
+}
+
+
+.bar-col span {
+    font-size: 9px;
+
+    color: #8a9199;
+}
+
+
+/* =========================================================
+   Leaflet Tooltip
+========================================================= */
+
+.risk-label {
+    background: #fff;
+
+    border:
+        1px solid #d8dde3;
+
+    color: #20242a;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 2px 5px rgba(0,
+            0,
+            0,
+            0.08);
+}
+
+
+/* =========================================================
+   Responsive
+========================================================= */
+
+@media (max-width: 1350px) {
+
+    .cards {
+        grid-template-columns:
+            repeat(4, minmax(150px, 1fr)) 280px;
+    }
+
+
+    .region-select-box {
+        width: 280px;
+    }
+
+}
+
+
+@media (max-width: 1100px) {
+
+    .app {
+        grid-template-columns:
+            220px 1fr;
+    }
+
+
+    .cards {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        width: 100%;
+    }
+
+
+    .region-select-box {
+        width: 100%;
+    }
+
+
+    .content-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    .app {
+        display: block;
+    }
+
+
+    .sidebar {
+        display: none;
+    }
+
+
+    .main {
+        padding: 14px;
+    }
+
+
+    .topbar {
+        display: block;
+    }
+
+
+    .cards {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        width: 100%;
+    }
+
+
+    .region-select-box {
+        width: 100%;
+    }
+
+
+    .bottom {
+        grid-template-columns:
+            1fr;
+    }
+
+}

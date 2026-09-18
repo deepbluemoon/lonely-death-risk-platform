@@ -83,12 +83,12 @@ $$
 ├── database/        # Oracle schema and data loaders
 ├── html/            # Dashboard and news UI
 ├── css/             # Service styles
-├── data/            # Reproducible input datasets
+├── data/            # Reproducible indicator datasets
 ├── preprocess.py    # Population preprocessing
 └── requirements.txt
 ```
 
-기존 가상환경, 캐시, macOS 메타데이터와 기획 문서는 공개용 저장소에서 제외했습니다. 코드에 있던 로컬 Oracle 경로와 비밀번호도 환경 변수 방식으로 변경했습니다.
+기존 가상환경, 캐시, macOS 메타데이터와 기획 문서는 공개용 저장소에서 제외했습니다. 용량이 크고 기사 본문을 포함한 파생 뉴스 CSV도 코드 저장소에서 제외했으며, 뉴스 적재 코드는 별도 데이터 파일을 주입하는 방식으로 유지했습니다. 코드에 있던 로컬 Oracle 경로와 비밀번호는 환경 변수 방식으로 변경했습니다.
 
 ## Run Locally
 
